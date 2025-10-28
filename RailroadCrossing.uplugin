@@ -1,0 +1,33 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0.5",
+	"FriendlyName": "RailroadCrossing",
+	"Description": "Railroad Crossing",
+	"Category": "Modding",
+	"CreatedBy": "Eikester",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Plugins": [
+		{
+			"Name": "SML",
+			"Enabled": true,
+			"SemVersion": "^3.11.1"
+		}
+	],
+	"Modules": [
+		{
+			"Name": "RailroadCrossing",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"SemVersion": "1.0.5",
+	"GameVersion": ">=416835"
+}
