@@ -4,6 +4,30 @@
 #include "MyFGRailroadCrossing.h"
 #include "FGRailroadTrackConnectionComponent.h"
 #include <Kismet/KismetMathLibrary.h>
+#include "FGTrainPlatformConnection.h"
+
+AMyFGRailroadCrossing::AMyFGRailroadCrossing() : Super()
+{
+	this->mRailroadTrack = nullptr;
+
+	if (this->mPlatformConnection0 == nullptr)
+	{
+		this->mPlatformConnection0 = CreateDefaultSubobject<UFGTrainPlatformConnection>(TEXT("PlatformConnection0"));
+		this->mPlatformConnection0->SetMobility(EComponentMobility::Static);
+	}
+	this->mPlatformConnections.Add(mPlatformConnection0);
+
+	if (this->mPlatformConnection1 == nullptr)
+	{
+		this->mPlatformConnection1 = CreateDefaultSubobject<UFGTrainPlatformConnection>(TEXT("PlatformConnection1"));
+		this->mPlatformConnection1->SetMobility(EComponentMobility::Static);
+	}
+	this->mPlatformConnections.Add(mPlatformConnection1);
+
+
+	this->mPlatformConnection0->SetupAttachment(RootComponent);
+	this->mPlatformConnection1->SetupAttachment(RootComponent);
+}
 
 /// <summary>
 /// startTrack: the Track from where to get all connected tracks
@@ -70,9 +94,34 @@ void AMyFGRailroadCrossing::GetConnectedTracks(AFGBuildableRailroadTrack* startT
 	outReverseConnectedTracks = GetConnectedTracksInDirection(startTrack, 1, mDistance);
 }
 
+void AMyFGRailroadCrossing::BeginPlay()
+{
+	Super::BeginPlay();
+}
+
 void AMyFGRailroadCrossing::Factory_Tick(float dt)
 {
 	Super::Factory_Tick(dt);
+}
+
+void AMyFGRailroadCrossing::SetupRailroadTrack()
+{
+	Super::SetupRailroadTrack();
+}
+
+void AMyFGRailroadCrossing::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+}
+
+void AMyFGRailroadCrossing::PreSaveGame_Implementation(int32 saveVersion, int32 gameVersion)
+{
+	Super::PreSaveGame_Implementation(saveVersion, gameVersion);
+}
+
+void AMyFGRailroadCrossing::PostLoadGame_Implementation(int32 saveVersion, int32 gameVersion)
+{
+	Super::PostLoadGame_Implementation(saveVersion, gameVersion);
 }
 
 void AMyFGRailroadCrossing::ShowTrackVisualization(AFGBuildableRailroadTrack* track)

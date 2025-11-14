@@ -30,7 +30,17 @@ class RAILROADCROSSING_API AMyFGRailroadCrossing : public AFGBuildableTrainPlatf
 {
 	GENERATED_BODY()
 	
+	AMyFGRailroadCrossing();
+
+	virtual void BeginPlay() override;
 	virtual void Factory_Tick(float dt) override;
+
+	virtual void SetupRailroadTrack() override;
+
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	virtual void PreSaveGame_Implementation(int32 saveVersion, int32 gameVersion) override;
+	virtual void PostLoadGame_Implementation(int32 saveVersion, int32 gameVersion) override;
 
 public:
 	UPROPERTY(BlueprintReadWrite, Category = "Railroad Crossing")
